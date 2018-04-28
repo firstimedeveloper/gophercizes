@@ -5,9 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
-	"math/rand"
 	"strings"
-	"time"
 )
 
 func main() {
@@ -25,17 +23,14 @@ func main() {
 	//numOfQ := len(records)
 	var score int
 	var temp string
-	seed := rand.New(rand.NewSource(time.Now().UnixNano()))
-	for {
-		randNum := seed.Intn(len(records))
-
-		fmt.Printf("%s= ", records[randNum][0])
+	for i := range records {
+		fmt.Printf("%s= ", records[i][0])
 		fmt.Scan(&temp)
-		// if score == len(records) {
-		// 	fmt.Println("You Won the game!")
-		// 	break
-		//}
-		if temp == records[randNum][1] {
+		if score == len(records) {
+			fmt.Println("You Won the game!")
+			break
+		}
+		if temp == records[i][1] {
 			fmt.Println("Correct!")
 			score++
 		} else {
@@ -43,5 +38,5 @@ func main() {
 			break
 		}
 	}
-	fmt.Printf("You got %d questions correct!", score)
+	fmt.Printf("You got %d question(s) correct out of %d total", score, len(records))
 }
