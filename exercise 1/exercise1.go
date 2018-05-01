@@ -11,6 +11,8 @@ import (
 )
 
 func main() {
+	rand.Seed(time.Now().UTC().UnixNano())
+
 	content, err := ioutil.ReadFile("problems.csv")
 	if err != nil {
 		log.Fatal(err)
@@ -22,20 +24,25 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	//numOfQ := len(records)
+
+	//Randomizes the array made from the csv file so that the questions aren't
+	//exactly the same every run
+	//An inside out method of shuffling a slice/array
+	for i := range records {
+		j := rand.Intn(i + 1)
+		records[i], records[j] = records[j], records[i]
+	}
+
 	var score int
 	var temp string
-	seed := rand.New(rand.NewSource(time.Now().UnixNano()))
-	for {
-		randNum := seed.Intn(len(records))
-
-		fmt.Printf("%s= ", records[randNum][0])
+	for i := range records {
+		fmt.Printf("%s= ", records[i][0])
 		fmt.Scan(&temp)
-		// if score == len(records) {
-		// 	fmt.Println("You Won the game!")
-		// 	break
-		//}
-		if temp == records[randNum][1] {
+		if score == len(records) {
+			fmt.Println("You Won the game!")
+			break
+		}
+		if temp == records[i][1] {
 			fmt.Println("Correct!")
 			score++
 		} else {
@@ -43,5 +50,5 @@ func main() {
 			break
 		}
 	}
-	fmt.Printf("You got %d questions correct!", score)
+	fmt.Printf("You got %d question(s) correct out of %d total", score, len(records))
 }
