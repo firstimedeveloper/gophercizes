@@ -5,10 +5,14 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"math/rand"
 	"strings"
+	"time"
 )
 
 func main() {
+	rand.Seed(time.Now().UTC().UnixNano())
+
 	content, err := ioutil.ReadFile("problems.csv")
 	if err != nil {
 		log.Fatal(err)
@@ -20,7 +24,15 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	//numOfQ := len(records)
+
+	//Randomizes the array made from the csv file so that the questions aren't
+	//exactly the same every run
+	//An inside out method of shuffling a slice/array
+	for i := range records {
+		j := rand.Intn(i + 1)
+		records[i], records[j] = records[j], records[i]
+	}
+
 	var score int
 	var temp string
 	for i := range records {
