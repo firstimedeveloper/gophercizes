@@ -54,13 +54,13 @@ func main() {
 
 	var score int
 	var temp string
-	fmt.Println("Press any key then enter to start the game")
+	fmt.Println("Press the Enter key to start the game")
 	fmt.Scanln(&temp)
 	for i := range records {
 		fmt.Printf("%s= ", records[i][0])
 		fmt.Scan(&temp)
 		if score == len(records) {
-			fmt.Println("You Won the game!")
+			fmt.Println("You Won te game!")
 			break
 		}
 		if temp == records[i][1] {
