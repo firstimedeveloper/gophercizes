@@ -60,7 +60,7 @@ func main() {
 		fmt.Printf("%s= ", records[i][0])
 		fmt.Scan(&temp)
 		if score == len(records) {
-			fmt.Println("You Won te game!")
+			fmt.Println("You Won the game!")
 			break
 		}
 		if temp == records[i][1] {
